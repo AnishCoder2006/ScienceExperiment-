@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "generate": "tsx scripts/generate.ts",
-    "recheck": "tsx scripts/recheck.ts"
+    "recheck": "tsx scripts/recheck.ts",
+    "table": "tsx scripts/table.ts"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.12",
