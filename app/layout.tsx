@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+// Plus Jakarta Sans: a clean, modern, very readable typeface.
+const jakarta = Plus_Jakarta_Sans({ variable: "--font-jakarta", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Science Diagram Maker",
-  description: "AI-generated animated GCSE science diagrams, checked in code and reviewed by a person.",
+  description: "Animated GCSE science diagrams, drawn by AI, checked in code and approved by a teacher.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${jakarta.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   );
 }

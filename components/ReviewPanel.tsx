@@ -25,20 +25,20 @@ export function ReviewPanel({ conceptName, review, loaded, onChange }: Props) {
   const toggle = (d: Decision) => onChange({ decision: decision === d ? null : d });
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-3">
       <div role="group" aria-label={`Review ${conceptName}`} className="grid grid-cols-2 gap-1.5">
         <button
           type="button"
           disabled={!loaded}
           aria-pressed={decision === "approved"}
           onClick={() => toggle("approved")}
-          className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-[13px] font-medium ring-1 ring-inset transition disabled:opacity-50 ${
+          className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold ring-1 ring-inset transition disabled:opacity-50 ${
             decision === "approved"
               ? "bg-pass text-white ring-pass dark:text-bg"
               : "bg-surface text-fg ring-border-strong hover:bg-pass-soft hover:text-pass hover:ring-pass/40"
           }`}
         >
-          <CheckIcon width={14} height={14} strokeWidth={2.5} />
+          <CheckIcon width={16} height={16} strokeWidth={2.5} />
           {decision === "approved" ? "Approved" : "Approve"}
         </button>
         <button
@@ -46,13 +46,13 @@ export function ReviewPanel({ conceptName, review, loaded, onChange }: Props) {
           disabled={!loaded}
           aria-pressed={decision === "rejected"}
           onClick={() => toggle("rejected")}
-          className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-[13px] font-medium ring-1 ring-inset transition disabled:opacity-50 ${
+          className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold ring-1 ring-inset transition disabled:opacity-50 ${
             decision === "rejected"
               ? "bg-fail text-white ring-fail dark:text-bg"
               : "bg-surface text-fg ring-border-strong hover:bg-fail-soft hover:text-fail hover:ring-fail/40"
           }`}
         >
-          <XIcon width={14} height={14} strokeWidth={2.5} />
+          <XIcon width={16} height={16} strokeWidth={2.5} />
           {decision === "rejected" ? "Rejected" : "Reject"}
         </button>
       </div>
@@ -64,12 +64,12 @@ export function ReviewPanel({ conceptName, review, loaded, onChange }: Props) {
           disabled={!loaded}
           value={review?.note ?? ""}
           onChange={(e) => onChange({ note: e.target.value })}
-          placeholder="Add a note, e.g. what to fix…"
-          className="block w-full resize-y rounded-lg bg-surface px-3 py-2 text-[13px] leading-5 text-fg ring-1 ring-inset ring-border-strong placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+          placeholder="Teacher's note, e.g. what is wrong or what to change…"
+          className="block w-full resize-y rounded-xl bg-surface px-3 py-2 text-sm leading-6 text-fg ring-1 ring-inset ring-border-strong placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
         />
       </label>
 
-      <p className="text-[11px] text-subtle" aria-live="polite">
+      <p className="text-xs text-subtle" aria-live="polite">
         {!loaded
           ? "Loading saved review…"
           : review?.updatedAt
