@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { CHECK_DESCRIPTIONS, CHECK_LABELS, CHECK_ORDER, OWN_CHECKS } from "@/lib/checkInfo";
 import { CONCEPTS } from "@/lib/concepts";
@@ -30,6 +30,7 @@ import {
   UndoIcon,
   XIcon,
 } from "./icons";
+import { CountUp, Reveal, Tilt, useReveal } from "./motion";
 import { ReviewPanel, type Review } from "./ReviewPanel";
 import { Button, StatusBadge, SubjectChip, SubjectTile } from "./ui";
 
@@ -171,62 +172,93 @@ export function Dashboard({ saved, savedAt }: Props) {
       {/* Hero */}
       <header className="relative overflow-hidden">
         <div className="hero-bg pointer-events-none absolute inset-0" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+          <div className="blob blob-a left-[8%] top-[18%] size-[26rem] bg-accent/25" />
+          <div className="blob blob-b right-[4%] top-[8%] size-[22rem] bg-accent-3/20" />
+        </div>
         <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
         <div className="relative mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-12 px-4 pb-16 pt-32 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:px-8 lg:pb-24 lg:pt-40">
           <div>
             <a
               href="#checks"
-              className="inline-flex items-center gap-2 rounded-full bg-surface/70 py-1 pl-1 pr-3 text-sm text-muted ring-1 ring-inset ring-border backdrop-blur transition hover:text-fg"
+              style={{ "--d": "0ms" } as React.CSSProperties}
+              className="animate-enter group inline-flex items-center gap-2 rounded-full bg-surface/70 py-1 pl-1 pr-3 text-sm text-muted ring-1 ring-inset ring-border backdrop-blur transition hover:text-fg hover:ring-accent/40"
             >
               <span className="rounded-full bg-accent px-2 py-0.5 text-xs font-semibold text-accent-fg">New</span>
               6 automatic checks on every diagram
-              <ArrowRightIcon width={14} height={14} />
+              <ArrowRightIcon width={14} height={14} className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-            <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.05] sm:text-6xl">
+            <h1
+              style={{ "--d": "100ms" } as React.CSSProperties}
+              className="animate-enter mt-6 text-[2.6rem] font-extrabold leading-[1.05] sm:text-6xl"
+            >
               Science diagrams that <span className="text-gradient">come alive</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+            <p style={{ "--d": "220ms" } as React.CSSProperties} className="animate-enter mt-6 max-w-xl text-lg leading-relaxed text-muted">
               Animated GCSE diagrams for Maths, Physics, Biology and Chemistry. AI draws them, code checks them, and a
               teacher approves them before they reach the classroom.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div style={{ "--d": "340ms" } as React.CSSProperties} className="animate-enter mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="#diagrams"
-                className="inline-flex items-center gap-2 rounded-xl bg-fg px-5 py-3 text-[15px] font-semibold text-bg shadow-card transition hover:opacity-90"
+                className="btn-shine group inline-flex items-center gap-2 rounded-xl bg-fg px-5 py-3 text-[15px] font-semibold text-bg shadow-card transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_var(--glow)] active:translate-y-0"
               >
-                Review the diagrams <ArrowRightIcon width={16} height={16} />
+                Review the diagrams{" "}
+                <ArrowRightIcon width={16} height={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
               <a
                 href="#how"
-                className="inline-flex items-center gap-2 rounded-xl bg-surface px-5 py-3 text-[15px] font-semibold ring-1 ring-inset ring-border-strong transition hover:bg-surface-2"
+                className="inline-flex items-center gap-2 rounded-xl bg-surface px-5 py-3 text-[15px] font-semibold ring-1 ring-inset ring-border-strong transition duration-300 hover:-translate-y-0.5 hover:bg-surface-2 hover:ring-accent/40 active:translate-y-0"
               >
                 How it works
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-2">
+            <div style={{ "--d": "460ms" } as React.CSSProperties} className="animate-enter mt-8 flex flex-wrap items-center gap-2">
               {(["Maths", "Physics", "Biology", "Chemistry"] as const).map((s) => (
-                <SubjectChip key={s} subject={s} />
+                <span key={s} className="transition-transform duration-300 hover:-translate-y-0.5">
+                  <SubjectChip subject={s} />
+                </span>
               ))}
             </div>
           </div>
 
-          <HeroPreview row={heroRow} onOpen={(id) => setOpenId(id)} />
+          <div style={{ "--d": "250ms" } as React.CSSProperties} className="animate-enter-pop">
+            <HeroPreview row={heroRow} onOpen={(id) => setOpenId(id)} />
+          </div>
         </div>
       </header>
 
       {/* Metrics band */}
       <section aria-label="Run summary" className="border-y border-border bg-surface/60 backdrop-blur">
         <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-border px-4 sm:px-6 lg:grid-cols-4 lg:divide-x lg:px-8">
-          <Metric label="Diagrams passing every check" value={`${stats.passing}/${CONCEPTS.length}`}>
+          <Metric
+            delay={0}
+            label="Diagrams passing every check"
+            value={<CountUp value={stats.passing} format={(n) => `${Math.round(n)}/${CONCEPTS.length}`} />}
+          >
             <Meter value={stats.passing} max={CONCEPTS.length} />
           </Metric>
-          <Metric label="Estimated cost (paid tier)" value={formatUsd(stats.cost)}>
+          <Metric delay={80} label="Estimated cost (paid tier)" value={<CountUp value={stats.cost} format={formatUsd} />}>
             {formatInt(stats.inputTokens)} tokens in · {formatInt(stats.outputTokens)} out
           </Metric>
-          <Metric label="Retries" value={String(stats.validationRetries + stats.apiRetries)}>
+          <Metric
+            delay={160}
+            label="Retries"
+            value={<CountUp value={stats.validationRetries + stats.apiRetries} format={(n) => String(Math.round(n))} />}
+          >
             {stats.validationRetries} after failed checks · {stats.apiRetries} after API errors
           </Metric>
-          <Metric label="Reviewed by a teacher" value={reviewsLoaded ? `${stats.approved + stats.rejected}/${CONCEPTS.length}` : "–"}>
+          <Metric
+            delay={240}
+            label="Reviewed by a teacher"
+            value={
+              reviewsLoaded ? (
+                <CountUp value={stats.approved + stats.rejected} duration={500} format={(n) => `${Math.round(n)}/${CONCEPTS.length}`} />
+              ) : (
+                "–"
+              )
+            }
+          >
             <span className="text-pass">{stats.approved} approved</span> ·{" "}
             <span className="text-fail">{stats.rejected} rejected</span>
           </Metric>
@@ -238,7 +270,7 @@ export function Dashboard({ saved, savedAt }: Props) {
 
         {/* Review queue: the table required by the brief */}
         <section id="diagrams" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+          <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading
               eyebrow="Review queue"
               title="Five concepts, ready for review"
@@ -257,7 +289,7 @@ export function Dashboard({ saved, savedAt }: Props) {
                 </span>
               )}
             </div>
-          </div>
+          </Reveal>
 
           {saved.length === 0 && (
             <div className="mt-8 flex gap-3 rounded-2xl bg-warn-soft p-4 text-[15px] text-warn ring-1 ring-inset ring-warn/30">
@@ -286,7 +318,7 @@ export function Dashboard({ saved, savedAt }: Props) {
                   const cell = `align-top px-6 py-7 ${last ? "" : "border-b border-border"}`;
                   const currentStep = job?.steps.at(-1)?.text;
                   return (
-                    <tr key={concept.id} className="animate-fade-up" style={{ animationDelay: `${i * 40}ms` }}>
+                    <Reveal as="tr" key={concept.id} delay={60} className="transition-colors duration-300 lg:hover:bg-surface-2/40">
                       {/* Concept + diagram + live generate */}
                       <td className={cell}>
                         <div className="flex items-start gap-3">
@@ -380,7 +412,7 @@ export function Dashboard({ saved, savedAt }: Props) {
                           onChange={(patch) => updateReview(concept.id, patch)}
                         />
                       </td>
-                    </tr>
+                    </Reveal>
                   );
                 })}
               </tbody>
@@ -409,10 +441,15 @@ function NavBar({ passing, total }: { passing: number; total: number }) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const listRef = useRef<HTMLUListElement>(null);
+  const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 8);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
       // The active section is the last one whose top has passed 40% of the screen.
       const line = window.innerHeight * 0.4;
       let current: string | null = null;
@@ -424,14 +461,29 @@ function NavBar({ passing, total }: { passing: number; total: number }) {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
+
+  // Slide the highlight pill under the active link.
+  useEffect(() => {
+    const place = () => {
+      const link = active ? listRef.current?.querySelector<HTMLAnchorElement>(`a[href="#${active}"]`) : null;
+      setPill(link ? { left: link.offsetLeft, width: link.offsetWidth } : null);
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [active]);
 
   return (
     <div className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4">
       <nav
         aria-label="Main"
-        className={`mx-auto max-w-6xl rounded-2xl bg-surface/90 ring-1 ring-border backdrop-blur-xl transition-shadow duration-300 ${
+        className={`relative mx-auto max-w-6xl rounded-2xl bg-surface/90 ring-1 ring-border backdrop-blur-xl transition-shadow duration-300 ${
           scrolled || menuOpen ? "shadow-card" : "shadow-subtle"
         }`}
       >
@@ -447,14 +499,19 @@ function NavBar({ passing, total }: { passing: number; total: number }) {
           </a>
 
           {/* Desktop links */}
-          <ul className="mx-auto hidden items-center gap-1 rounded-xl bg-surface-2/70 p-1 ring-1 ring-inset ring-border md:flex">
+          <ul ref={listRef} className="relative mx-auto hidden items-center gap-1 rounded-xl bg-surface-2/70 p-1 ring-1 ring-inset ring-border md:flex">
+            <span
+              aria-hidden
+              className="absolute bottom-1 top-1 rounded-lg bg-surface shadow-subtle ring-1 ring-border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{ left: pill?.left ?? 0, width: pill?.width ?? 0, opacity: pill ? 1 : 0 }}
+            />
             {NAV_LINKS.map(({ id, label }) => (
-              <li key={id}>
+              <li key={id} className="relative">
                 <a
                   href={`#${id}`}
                   aria-current={active === id ? "location" : undefined}
-                  className={`block rounded-lg px-3.5 py-1.5 text-sm font-medium transition ${
-                    active === id ? "bg-surface text-fg shadow-subtle ring-1 ring-border" : "text-muted hover:text-fg"
+                  className={`block rounded-lg px-3.5 py-1.5 text-sm font-medium transition-colors duration-300 ${
+                    active === id ? "text-fg" : "text-muted hover:text-fg"
                   }`}
                 >
                   {label}
@@ -502,6 +559,14 @@ function NavBar({ passing, total }: { passing: number; total: number }) {
           </div>
         </div>
 
+        {/* Scroll progress */}
+        <div className="pointer-events-none absolute inset-x-4 bottom-0 h-[2px] overflow-hidden rounded-full" aria-hidden>
+          <div
+            className="h-full origin-left bg-linear-to-r from-accent via-accent-2 to-accent-3 transition-transform duration-150 ease-out"
+            style={{ transform: `scaleX(${progress})` }}
+          />
+        </div>
+
         {/* Mobile menu */}
         {menuOpen && (
           <ul className="animate-fade-up space-y-1 border-t border-border p-2 md:hidden">
@@ -537,9 +602,9 @@ function HeroPreview({
   onOpen: (id: number) => void;
 }) {
   return (
-    <div className="relative">
+    <div className="animate-float relative">
       <div className="absolute -inset-6 -z-10 rounded-[40px] bg-accent/20 blur-3xl" aria-hidden />
-      <div className="gradient-ring shadow-card">
+      <Tilt className="gradient-ring shadow-card">
         <div className="overflow-hidden rounded-[23px] bg-surface">
           <div className="flex items-center gap-2 border-b border-border px-4 py-3">
             <span className="size-3 rounded-full bg-[#ff5f57]" />
@@ -558,11 +623,11 @@ function HeroPreview({
             <button
               type="button"
               onClick={() => onOpen(row.concept.id)}
-              className="block w-full cursor-zoom-in bg-paper p-3"
+              className="group/img block w-full cursor-zoom-in overflow-hidden bg-paper p-3"
               aria-label={`Open details for ${row.concept.name}`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={svgDataUri(row.result.svg)} alt={`Animated diagram: ${row.concept.name}`} className="aspect-8/5 w-full object-contain" />
+              <img src={svgDataUri(row.result.svg)} alt={`Animated diagram: ${row.concept.name}`} className="aspect-8/5 w-full object-contain transition-transform duration-700 ease-out group-hover/img:scale-[1.04]" />
             </button>
           ) : (
             <div className="grid aspect-8/5 place-items-center bg-surface-2 text-sm text-subtle">No diagram generated yet</div>
@@ -583,18 +648,18 @@ function HeroPreview({
             </div>
           )}
         </div>
-      </div>
+      </Tilt>
     </div>
   );
 }
 
 function SectionHeading({ eyebrow, title, text, center }: { eyebrow: string; title: string; text: string; center?: boolean }) {
   return (
-    <div className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+    <Reveal className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
       <p className="text-sm font-semibold uppercase tracking-wider text-accent">{eyebrow}</p>
       <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">{title}</h2>
       <p className="mt-3 text-lg leading-relaxed text-muted">{text}</p>
-    </div>
+    </Reveal>
   );
 }
 
@@ -615,14 +680,19 @@ function HowItWorks() {
       <ol className="relative mt-12 grid gap-4 md:grid-cols-3">
         <div className="absolute left-[16%] right-[16%] top-8 hidden h-px bg-linear-to-r from-accent/0 via-border-strong to-accent/0 md:block" aria-hidden />
         {steps.map(({ Icon, title, text }, i) => (
-          <li key={title} className="relative rounded-3xl bg-surface p-6 text-center shadow-subtle ring-1 ring-inset ring-border">
-            <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-3 text-white shadow-card">
+          <Reveal
+            as="li"
+            key={title}
+            delay={i * 120}
+            className="group relative rounded-3xl bg-surface p-6 text-center shadow-subtle ring-1 ring-inset ring-border hover:-translate-y-1.5 hover:shadow-card hover:ring-accent/40"
+          >
+            <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-3 text-white shadow-card transition-transform duration-500 ease-out group-hover:-rotate-6 group-hover:scale-110">
               <Icon width={24} height={24} />
             </span>
             <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-subtle">Step {i + 1}</p>
             <p className="mt-1 text-lg font-bold">{title}</p>
             <p className="mt-2 text-[15px] leading-relaxed text-muted">{text}</p>
-          </li>
+          </Reveal>
         ))}
       </ol>
     </section>
@@ -649,13 +719,18 @@ function ChecksSection() {
           text="Every diagram is checked in code before it is accepted. If a check fails, the model is asked again once with the exact reasons. API errors 429 and 503 are retried up to 3 times."
         />
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {CHECK_ORDER.map((id) => {
+          {CHECK_ORDER.map((id, i) => {
             const Icon = CHECK_ICONS[id];
             const extra = OWN_CHECKS.includes(id);
             return (
-              <li key={id} className="group rounded-3xl bg-surface p-6 shadow-subtle ring-1 ring-inset ring-border transition hover:-translate-y-0.5 hover:shadow-card">
+              <Reveal
+                as="li"
+                key={id}
+                delay={(i % 3) * 100}
+                className="group rounded-3xl bg-surface p-6 shadow-subtle ring-1 ring-inset ring-border hover:-translate-y-1.5 hover:shadow-card hover:ring-accent/40"
+              >
                 <div className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-xl bg-accent-soft text-accent">
+                  <span className="grid size-11 place-items-center rounded-xl bg-accent-soft text-accent transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-fg">
                     <Icon width={20} height={20} />
                   </span>
                   <span
@@ -668,7 +743,7 @@ function ChecksSection() {
                 </div>
                 <p className="mt-4 text-lg font-bold">{CHECK_LABELS[id]}</p>
                 <p className="mt-1.5 text-[15px] leading-relaxed text-muted">{CHECK_DESCRIPTIONS[id]}</p>
-              </li>
+              </Reveal>
             );
           })}
         </ul>
@@ -715,21 +790,38 @@ function KeyIdea({ concept }: { concept: Concept }) {
   );
 }
 
-function Metric({ label, value, children }: { label: string; value: string; children?: React.ReactNode }) {
+function Metric({
+  label,
+  value,
+  delay = 0,
+  children,
+}: {
+  label: string;
+  value: React.ReactNode;
+  delay?: number;
+  children?: React.ReactNode;
+}) {
   return (
-    <div className="px-2 py-8 lg:px-8 lg:first:pl-0">
+    <Reveal delay={delay} className="px-2 py-8 lg:px-8 lg:first:pl-0">
       <dt className="text-sm text-muted">{label}</dt>
       <dd className="mt-1 text-4xl font-extrabold tabular-nums tracking-tight">{value}</dd>
       {children && <dd className="mt-2 text-xs text-subtle">{children}</dd>}
-    </div>
+    </Reveal>
   );
 }
 
+/** One bar per diagram; the passing ones fill in one after another when scrolled into view. */
 function Meter({ value, max }: { value: number; max: number }) {
+  const [ref, state] = useReveal<HTMLDivElement>();
   return (
-    <div className="flex gap-1" aria-hidden>
+    <div ref={ref} className="flex gap-1" aria-hidden>
       {Array.from({ length: max }, (_, i) => (
-        <span key={i} className={`h-1.5 flex-1 rounded-full ${i < value ? "bg-pass" : "bg-border-strong"}`} />
+        <span key={i} className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-border-strong">
+          <span
+            className="absolute inset-0 origin-left rounded-full bg-pass transition-transform duration-700 ease-out"
+            style={{ transform: `scaleX(${state !== "hidden" && i < value ? 1 : 0})`, transitionDelay: `${300 + i * 140}ms` }}
+          />
+        </span>
       ))}
     </div>
   );
@@ -749,7 +841,7 @@ function JobLog({ job }: { job: Job }) {
       )}
       <ol className="space-y-1">
         {job.steps.slice(1).map((s, i) => (
-          <li key={i} className="flex gap-1.5 text-[13px] leading-snug text-muted">
+          <li key={i} className="animate-fade-up flex gap-1.5 text-[13px] leading-snug text-muted">
             {s.tone === "pass" ? (
               <CheckIcon width={14} height={14} className="mt-px shrink-0 text-pass" />
             ) : s.tone === "fail" ? (

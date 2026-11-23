@@ -72,14 +72,14 @@ export function Button({
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "secondary" | "ghost" }) {
   const styles = {
-    primary: "bg-accent text-accent-fg hover:bg-accent-hover shadow-subtle",
+    primary: "btn-shine bg-accent text-accent-fg hover:bg-accent-hover shadow-subtle hover:shadow-[0_10px_24px_-10px_var(--accent)]",
     secondary: "bg-surface text-fg ring-1 ring-inset ring-border-strong hover:bg-surface-2 shadow-subtle",
     ghost: "text-muted hover:text-fg hover:bg-surface-2",
   }[variant];
   return (
     <button
       type="button"
-      className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${styles} ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium transition-all duration-300 hover:-translate-y-px active:translate-y-0 active:scale-[0.97] disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:opacity-50 ${styles} ${className}`}
       {...props}
     />
   );

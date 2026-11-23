@@ -19,18 +19,18 @@ export function DiagramPreview({ svg, alt, busyMessage, onOpen }: Props) {
       onClick={onOpen}
       disabled={!svg || !onOpen}
       aria-label={svg ? `Open details for ${alt}` : alt}
-      className="group relative block aspect-[8/5] w-full overflow-hidden rounded-2xl bg-paper shadow-subtle ring-1 ring-border transition hover:shadow-card hover:ring-border-strong enabled:cursor-zoom-in"
+      className="group relative block aspect-[8/5] w-full overflow-hidden rounded-2xl bg-paper shadow-subtle ring-1 ring-border transition duration-300 hover:shadow-card hover:ring-accent/40 enabled:cursor-zoom-in"
     >
       {svg ? (
         // next/image adds nothing for an inline data URI, and must not rasterise the animation.
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={svgDataUri(svg)} alt={alt} className="h-full w-full object-contain p-2" />
+        <img src={svgDataUri(svg)} alt={alt} className="h-full w-full object-contain p-2 transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
       ) : (
         <span className="grid h-full place-items-center text-sm text-slate-500">No diagram yet. Press Generate to draw one.</span>
       )}
 
       {svg && onOpen && !busyMessage && (
-        <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-lg bg-slate-900/75 px-2.5 py-1 text-xs font-medium text-white opacity-0 backdrop-blur transition group-hover:opacity-100 group-focus-visible:opacity-100">
+        <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-lg bg-slate-900/75 px-2.5 py-1 text-xs font-medium text-white opacity-0 backdrop-blur transition duration-300 translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:opacity-100">
           <ExpandIcon width={13} height={13} /> Enlarge &amp; details
         </span>
       )}

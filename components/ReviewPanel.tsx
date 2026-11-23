@@ -32,9 +32,9 @@ export function ReviewPanel({ conceptName, review, loaded, onChange }: Props) {
           disabled={!loaded}
           aria-pressed={decision === "approved"}
           onClick={() => toggle("approved")}
-          className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold ring-1 ring-inset transition disabled:opacity-50 ${
+          className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold ring-1 ring-inset transition-all duration-300 active:scale-95 disabled:opacity-50 ${
             decision === "approved"
-              ? "bg-pass text-white ring-pass dark:text-bg"
+              ? "animate-pop bg-pass text-white shadow-[0_8px_20px_-8px_var(--pass)] ring-pass dark:text-bg"
               : "bg-surface text-fg ring-border-strong hover:bg-pass-soft hover:text-pass hover:ring-pass/40"
           }`}
         >
@@ -46,9 +46,9 @@ export function ReviewPanel({ conceptName, review, loaded, onChange }: Props) {
           disabled={!loaded}
           aria-pressed={decision === "rejected"}
           onClick={() => toggle("rejected")}
-          className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold ring-1 ring-inset transition disabled:opacity-50 ${
+          className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold ring-1 ring-inset transition-all duration-300 active:scale-95 disabled:opacity-50 ${
             decision === "rejected"
-              ? "bg-fail text-white ring-fail dark:text-bg"
+              ? "animate-pop bg-fail text-white shadow-[0_8px_20px_-8px_var(--fail)] ring-fail dark:text-bg"
               : "bg-surface text-fg ring-border-strong hover:bg-fail-soft hover:text-fail hover:ring-fail/40"
           }`}
         >
@@ -65,7 +65,7 @@ export function ReviewPanel({ conceptName, review, loaded, onChange }: Props) {
           value={review?.note ?? ""}
           onChange={(e) => onChange({ note: e.target.value })}
           placeholder="Teacher's note, e.g. what is wrong or what to change…"
-          className="block w-full resize-y rounded-xl bg-surface px-3 py-2 text-sm leading-6 text-fg ring-1 ring-inset ring-border-strong placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
+          className="block w-full resize-y rounded-xl bg-surface px-3 py-2 text-sm leading-6 text-fg ring-1 ring-inset ring-border-strong transition-shadow duration-300 placeholder:text-subtle focus:shadow-[0_0_0_4px_var(--accent-soft)] focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
         />
       </label>
 

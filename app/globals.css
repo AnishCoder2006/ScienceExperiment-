@@ -128,7 +128,9 @@ section[id] {
 }
 
 .text-gradient {
-  background: linear-gradient(100deg, var(--accent) 10%, var(--accent-2) 55%, var(--accent-3) 95%);
+  background: linear-gradient(100deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent-2), var(--accent));
+  background-size: 250% auto;
+  animation: gradient-pan 7s ease-in-out infinite alternate;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -205,8 +207,175 @@ dialog::backdrop {
   animation: fade-up 0.25s ease-out both;
 }
 
+/* ---------- Motion ---------- */
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scroll reveal (see components/motion.tsx). */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  filter: blur(4px);
+  /* The first three animate the reveal (staggered); the rest keep hover effects smooth. */
+  transition-property: opacity, transform, filter, translate, box-shadow, background-color;
+  transition-duration: 0.8s, 0.8s, 0.8s, 0.4s, 0.4s, 0.3s;
+  transition-timing-function: var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms, 0ms;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Page-load entrance for the hero, staggered with --d. */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.animate-enter {
+  animation: enter 0.9s var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes enter-pop {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-enter-pop {
+  animation: enter-pop 1.1s var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* Slowly drifting glow blobs behind the hero. */
+@keyframes drift-a {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.15); }
+  100% { transform: translate(-30px, 20px) scale(0.95); }
+}
+@keyframes drift-b {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-70px, -30px) scale(1.1); }
+  100% { transform: translate(40px, -10px) scale(1.05); }
+}
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.55;
+}
+.blob-a {
+  animation: drift-a 18s ease-in-out infinite alternate;
+}
+.blob-b {
+  animation: drift-b 22s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+
+/* Glare that follows the mouse on a <Tilt>. */
+.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-glare {
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / 0.14), transparent 45%);
+  mix-blend-mode: overlay;
+}
+
+/* A light sweep across primary buttons on hover. */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--ease-out);
+}
+.btn-shine:hover::after {
+  transform: translateX(120%);
+}
+
+/* A little bounce when a review decision is picked. */
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.animate-pop {
+  animation: pop 0.35s var(--ease-out);
+}
+
+/* Details dialog opens with a fade and a small zoom. */
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+dialog[open] {
+  animation: dialog-in 0.35s var(--ease-out);
+}
+dialog[open]::backdrop {
+  animation: backdrop-in 0.3s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
