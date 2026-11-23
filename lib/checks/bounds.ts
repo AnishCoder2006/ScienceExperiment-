@@ -59,6 +59,20 @@ function animationValues(anim: Element): string[] {
   return [anim.getAttribute("from"), anim.getAttribute("to")].filter((v): v is string => !!v);
 }
 
+/**
+ * True when an animation starts on the first frame and never lets go: it repeats forever,
+ * or freezes on its last value. Then the element's own (base) value is never on screen,
+ * so it should not count. A delayed or click-triggered animation shows the base value first.
+ */
+function replacesBaseValue(anim: Element): boolean {
+  if (anim.getAttribute("additive") === "sum" || anim.hasAttribute("by")) return false;
+  const begin = (anim.getAttribute("begin") ?? "0s").split(";")[0].trim();
+  const clock = begin.match(/^(-?\d*\.?\d+)(ms|s|min|h)?$/);
+  if (!clock || parseFloat(clock[1]) > 0) return false;
+  const forever = anim.getAttribute("repeatCount") === "indefinite" || anim.getAttribute("repeatDur") === "indefinite";
+  return forever || anim.getAttribute("fill") === "freeze";
+}
+
 /** Pick at most `max` evenly spaced items, always keeping the first and last. */
 function sample<T>(items: T[], max: number): T[] {
   if (items.length <= max) return items;
@@ -72,7 +86,8 @@ function sample<T>(items: T[], max: number): T[] {
  */
 function localTransforms(el: Element): Matrix[] {
   const own = parseTransform(el.getAttribute("transform"));
-  const variants: Matrix[] = [own];
+  const variants: Matrix[] = [];
+  let baseShown = true;
 
   for (const anim of childElements(el)) {
     if (anim.localName === "animateTransform") {
@@ -102,8 +117,10 @@ function localTransforms(el: Element): Matrix[] {
           });
       // Motion is applied on top of the element's own transform.
       for (const [x, y] of offsets) variants.push(multiply(translate(x, y), own));
+      if (offsets.length && replacesBaseValue(anim)) baseShown = false;
     }
   }
+  if (baseShown) variants.unshift(own);
   return sample(variants, MAX_VARIANTS);
 }
 
@@ -220,12 +237,19 @@ function animatedLocalBox(el: Element, vb: Box, styles: StyleSheet): Box | null 
   const measure = (get: (n: string) => string | null) =>
     el.localName === "text" ? textBox(el, get, styles) : shapeBox(el.localName ?? "", get, vb);
 
-  let box = measure((n) => el.getAttribute(n));
-  for (const anim of childElements(el)) {
-    const attr = anim.getAttribute("attributeName") ?? "";
-    if (anim.localName !== "animate" || !GEOMETRY_ATTRS.has(attr)) continue;
+  const anims = childElements(el).filter(
+    (a) => a.localName === "animate" && GEOMETRY_ATTRS.has(a.getAttribute("attributeName") ?? "") && animationValues(a).length > 0,
+  );
+  // Attributes whose base value is never on screen use their first animated value instead.
+  const replaced = new Map<string, string>();
+  for (const a of anims) if (replacesBaseValue(a)) replaced.set(a.getAttribute("attributeName")!, animationValues(a)[0]);
+  const base = (n: string) => replaced.get(n) ?? el.getAttribute(n);
+
+  let box = measure(base);
+  for (const anim of anims) {
+    const attr = anim.getAttribute("attributeName")!;
     for (const value of animationValues(anim)) {
-      box = union(box, measure((n) => (n === attr ? value : el.getAttribute(n))));
+      box = union(box, measure((n) => (n === attr ? value : base(n))));
     }
   }
   return box;

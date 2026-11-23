@@ -112,6 +112,22 @@ describe("check 2: inside viewBox", () => {
     expect(check(svg(body), "inViewBox").detail).toMatch(/top edge/);
   });
 
+  it("ignores a base position that a never-ending animation replaces from the first frame", () => {
+    // No cx means cx=0, but the dot moves from x=200 at once and forever, so x=0 is never on screen.
+    const moving = `<circle r="6" cy="100"><animate attributeName="cx" values="200;600;200" dur="4s" repeatCount="indefinite"/></circle>`;
+    expect(check(svg(moving), "inViewBox").passed).toBe(true);
+    const motion = `<circle cx="0" cy="0" r="6"><animateMotion path="M 200 120 H 600" dur="2s" repeatCount="indefinite"/></circle>`;
+    expect(check(svg(motion), "inViewBox").passed).toBe(true);
+  });
+
+  it("still counts the base position when the animation starts late", () => {
+    // begin="1s": for the first second the dot sits at (0, 0), half outside the picture.
+    const late = `<circle cx="0" cy="0" r="6"><animateMotion path="M 200 120 H 600" begin="1s" dur="2s" repeatCount="indefinite"/></circle>`;
+    expect(check(svg(late), "inViewBox").detail).toMatch(/left edge at x=-6/);
+    const once = `<circle r="6" cy="100"><animate attributeName="cx" values="200;600" dur="4s"/></circle>`;
+    expect(check(svg(once), "inViewBox").passed).toBe(false);
+  });
+
   it("allows a rotation that stays inside", () => {
     const body = `<g><rect x="380" y="230" width="40" height="40"/><animateTransform attributeName="transform" type="rotate" from="0 400 250" to="360 400 250" dur="4s"/></g>`;
     expect(check(svg(body), "inViewBox").passed).toBe(true);
