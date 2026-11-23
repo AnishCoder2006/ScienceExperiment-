@@ -77,6 +77,8 @@ export interface DiagramResult {
   /** Which attempt was kept as the final result (1-based). */
   chosenAttempt: number;
   attempts: AttemptLog[];
+  /** Things that went wrong but did not stop us, e.g. the retry call itself failed. */
+  warnings: string[];
   durationMs: number;
   generatedAt: string;
 }
