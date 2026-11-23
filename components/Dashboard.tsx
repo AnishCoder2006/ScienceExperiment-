@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { CHECK_DESCRIPTIONS, CHECK_LABELS, CHECK_ORDER, OWN_CHECKS } from "@/lib/checkInfo";
 import { CONCEPTS } from "@/lib/concepts";
@@ -19,6 +19,7 @@ import {
   FrameIcon,
   GithubIcon,
   LightbulbIcon,
+  MenuIcon,
   PencilIcon,
   PlayIcon,
   ShieldCheckIcon,
@@ -165,13 +166,13 @@ export function Dashboard({ saved, savedAt }: Props) {
 
   return (
     <div className="min-h-screen">
-      <NavBar />
+      <NavBar passing={stats.passing} total={CONCEPTS.length} />
 
       {/* Hero */}
       <header className="relative overflow-hidden">
         <div className="hero-bg pointer-events-none absolute inset-0" aria-hidden />
         <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-16 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:px-8 lg:pb-24 lg:pt-24">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-12 px-4 pb-16 pt-32 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:px-8 lg:pb-24 lg:pt-40">
           <div>
             <a
               href="#checks"
@@ -181,7 +182,7 @@ export function Dashboard({ saved, savedAt }: Props) {
               6 automatic checks on every diagram
               <ArrowRightIcon width={14} height={14} />
             </a>
-            <h1 className="mt-6 text-5xl font-extrabold leading-[1.05] sm:text-6xl">
+            <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.05] sm:text-6xl">
               Science diagrams that <span className="text-gradient">come alive</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
@@ -397,31 +398,135 @@ export function Dashboard({ saved, savedAt }: Props) {
   );
 }
 
-function NavBar() {
+const NAV_LINKS = [
+  { id: "how", label: "How it works" },
+  { id: "diagrams", label: "Diagrams" },
+  { id: "checks", label: "Checks" },
+];
+
+/** Floating nav: turns into frosted glass on scroll and highlights the section in view. */
+function NavBar({ passing, total }: { passing: number; total: number }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      // The active section is the last one whose top has passed 40% of the screen.
+      const line = window.innerHeight * 0.4;
+      let current: string | null = null;
+      for (const { id } of NAV_LINKS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= line) current = id;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-40 border-b border-border/70 bg-bg/75 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
-        <a href="#" className="flex items-center gap-2.5 font-bold tracking-tight">
-          <span className="grid size-8 place-items-center rounded-lg bg-linear-to-br from-accent via-accent-3 to-accent-2 text-white shadow-subtle">
-            <AtomIcon width={18} height={18} />
-          </span>
-          Science Diagram Maker
-        </a>
-        <div className="ml-auto hidden items-center gap-1 text-sm text-muted md:flex">
-          <a href="#how" className="rounded-lg px-3 py-1.5 transition hover:bg-surface-2 hover:text-fg">How it works</a>
-          <a href="#diagrams" className="rounded-lg px-3 py-1.5 transition hover:bg-surface-2 hover:text-fg">Diagrams</a>
-          <a href="#checks" className="rounded-lg px-3 py-1.5 transition hover:bg-surface-2 hover:text-fg">Checks</a>
+    <div className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4">
+      <nav
+        aria-label="Main"
+        className={`mx-auto max-w-6xl rounded-2xl transition-all duration-300 ${
+          scrolled || menuOpen
+            ? "bg-surface/80 shadow-card ring-1 ring-border backdrop-blur-xl"
+            : "bg-transparent ring-1 ring-transparent"
+        }`}
+      >
+        <div className="flex h-14 items-center gap-3 pl-3 pr-2">
+          <a href="#" className="group flex min-w-0 items-center gap-2.5" onClick={() => setMenuOpen(false)}>
+            <span className="grid size-9 place-items-center rounded-xl bg-linear-to-br from-accent via-accent-3 to-accent-2 text-white shadow-subtle transition-transform duration-500 group-hover:rotate-180">
+              <AtomIcon width={19} height={19} />
+            </span>
+            <span className="leading-none">
+              <span className="block truncate text-[15px] font-extrabold tracking-tight">Science Diagram Maker</span>
+              <span className="mt-1 block text-[11px] font-medium text-subtle">GCSE · AI · checked</span>
+            </span>
+          </a>
+
+          {/* Desktop links */}
+          <ul className="mx-auto hidden items-center gap-1 rounded-xl bg-surface-2/70 p-1 ring-1 ring-inset ring-border md:flex">
+            {NAV_LINKS.map(({ id, label }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  aria-current={active === id ? "location" : undefined}
+                  className={`block rounded-lg px-3.5 py-1.5 text-sm font-medium transition ${
+                    active === id ? "bg-surface text-fg shadow-subtle ring-1 ring-border" : "text-muted hover:text-fg"
+                  }`}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="ml-auto flex items-center gap-2 md:ml-0">
+            <span
+              className="hidden items-center gap-1.5 rounded-full bg-pass-soft px-2.5 py-1 text-xs font-semibold text-pass lg:inline-flex"
+              title="Diagrams passing every check"
+            >
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-pass opacity-60" />
+                <span className="relative inline-flex size-2 rounded-full bg-pass" />
+              </span>
+              {passing}/{total} passing
+            </span>
+            <a
+              href={REPO_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Source code on GitHub"
+              title="Source code on GitHub"
+              className="grid size-9 place-items-center rounded-xl text-muted ring-1 ring-inset ring-border transition hover:bg-surface-2 hover:text-fg"
+            >
+              <GithubIcon width={17} height={17} />
+            </a>
+            <a
+              href="#diagrams"
+              className="hidden items-center gap-1.5 rounded-xl bg-fg px-4 py-2 text-sm font-semibold text-bg transition hover:opacity-90 sm:inline-flex"
+            >
+              Review diagrams <ArrowRightIcon width={15} height={15} />
+            </a>
+            <button
+              type="button"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((o) => !o)}
+              className="grid size-9 place-items-center rounded-xl ring-1 ring-inset ring-border transition hover:bg-surface-2 md:hidden"
+            >
+              {menuOpen ? <XIcon width={18} height={18} /> : <MenuIcon width={18} height={18} />}
+            </button>
+          </div>
         </div>
-        <a
-          href={REPO_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="ml-auto inline-flex items-center gap-2 rounded-lg bg-surface px-3 py-1.5 text-sm font-medium ring-1 ring-inset ring-border transition hover:bg-surface-2 md:ml-0"
-        >
-          <GithubIcon width={16} height={16} /> GitHub
-        </a>
-      </div>
-    </nav>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <ul className="animate-fade-up space-y-1 border-t border-border p-2 md:hidden">
+            {NAV_LINKS.map(({ id, label }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  onClick={() => setMenuOpen(false)}
+                  className={`block rounded-xl px-3 py-2.5 text-[15px] font-medium ${
+                    active === id ? "bg-surface-2 text-fg" : "text-muted hover:bg-surface-2 hover:text-fg"
+                  }`}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+            <li className="px-3 py-2 text-sm font-semibold text-pass">
+              {passing}/{total} diagrams passing every check
+            </li>
+          </ul>
+        )}
+      </nav>
+    </div>
   );
 }
 
