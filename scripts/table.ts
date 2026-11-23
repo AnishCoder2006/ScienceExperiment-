@@ -26,4 +26,5 @@ console.log("| Concept | Result | Est. cost | Retries | Tokens in / out | Failed
 console.log("|---|---|---|---|---|---|");
 for (const row of rows) console.log(`| ${row.join(" | ")} |`);
 console.log(`| **Total** | | **${formatUsd(total)}** | | | |`);
-console.log(`\nModel: ${file.results[0]?.model ?? "-"} · generated ${file.generatedAt}`);
+const models = [...new Set(file.results.map((r) => r.model))].join(", ") || "-";
+console.log(`\nModels: ${models} · generated ${file.generatedAt}`);
