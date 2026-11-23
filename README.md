@@ -2,7 +2,7 @@
 
 A small web app that asks Gemini for 5 animated GCSE science diagrams (SVG), checks each one in code, retries once with the reasons when a check fails, and lets a reviewer approve or reject each diagram.
 
-**Live app:** _add the Vercel link here_
+**Live app:** https://science-experiment-nine.vercel.app/
 
 ---
 
