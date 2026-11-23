@@ -9,7 +9,7 @@ export const MAX_API_RETRIES = 3;
 /** Never wait longer than this for one retry. Longer waits mean the daily quota is gone. */
 const MAX_WAIT_MS = 60_000;
 /** One model call may not take longer than this. */
-const REQUEST_TIMEOUT_MS = 90_000;
+const REQUEST_TIMEOUT_MS = 180_000;
 
 export class GeminiError extends Error {
   constructor(

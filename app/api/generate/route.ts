@@ -11,9 +11,9 @@ import type { PipelineEvent } from "@/lib/types";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 /** Vercel stops the function after this many seconds. */
-export const maxDuration = 120;
+export const maxDuration = 300;
 /** Our own budget is a bit shorter, so the user gets a clear error instead of a cut connection. */
-const TIME_BUDGET_MS = 110_000;
+const TIME_BUDGET_MS = 290_000;
 
 export async function POST(request: Request) {
   let conceptId: unknown;
