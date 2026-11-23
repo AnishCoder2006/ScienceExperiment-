@@ -1,19 +1,9 @@
 import { DOMParser, type Element } from "@xmldom/xmldom";
+import { CHECK_LABELS, CHECK_ORDER } from "../checkInfo";
 import type { CheckId, CheckResult, Concept } from "../types";
 import { checkBounds } from "./bounds";
 import type { Box } from "./geometry";
 import { StyleSheet } from "./styles";
-
-export const CHECK_LABELS: Record<CheckId, string> = {
-  valid: "Valid SVG",
-  inViewBox: "Inside viewBox",
-  labels: "Title + 3 labels",
-  animated: "Animated",
-  keyTerms: "Key terms labelled",
-  safe: "Safe to embed",
-};
-
-export const CHECK_ORDER: CheckId[] = ["valid", "inViewBox", "labels", "animated", "keyTerms", "safe"];
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 

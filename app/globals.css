@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
+/* Design tokens. Components use them through Tailwind classes such as bg-surface or text-muted. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #f8f9fb;
+  --border: #e3e6eb;
+  --border-strong: #cdd3dc;
+  --fg: #0f172a;
+  --muted: #586374;
+  --subtle: #8792a2;
+  --accent: #4338ca;
+  --accent-hover: #3730a3;
+  --accent-fg: #ffffff;
+  --accent-soft: #eef0ff;
+  --pass: #15803d;
+  --pass-soft: #e7f6ec;
+  --fail: #c2261d;
+  --fail-soft: #fdecea;
+  --warn: #a16207;
+  --warn-soft: #fef6dc;
+  --paper: #ffffff;
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05);
+  --shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 6px 20px -6px rgb(15 23 42 / 0.1);
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #0a0d12;
+    --surface: #11151c;
+    --surface-2: #161b24;
+    --border: #232a35;
+    --border-strong: #323b48;
+    --fg: #e7ecf3;
+    --muted: #9ca7b6;
+    --subtle: #6b7686;
+    --accent: #8f97ff;
+    --accent-hover: #a9afff;
+    --accent-fg: #0a0d12;
+    --accent-soft: rgb(143 151 255 / 0.12);
+    --pass: #4ade80;
+    --pass-soft: rgb(74 222 128 / 0.1);
+    --fail: #f87171;
+    --fail-soft: rgb(248 113 113 / 0.1);
+    --warn: #fbbf24;
+    --warn-soft: rgb(251 191 36 / 0.1);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -10px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-pass: var(--pass);
+  --color-pass-soft: var(--pass-soft);
+  --color-fail: var(--fail);
+  --color-fail-soft: var(--fail-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-paper: var(--paper);
+  --shadow-card: var(--shadow);
+  --shadow-subtle: var(--shadow-sm);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Faint dot grid behind the header, like lab notebook paper. */
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--border-strong) 1px, transparent 0);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, black 30%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* On screens narrower than 1024px each table row becomes a card. */
+@media (max-width: 1023px) {
+  .review-table thead {
+    display: none;
+  }
+  .review-table,
+  .review-table tbody,
+  .review-table tr,
+  .review-table td {
+    display: block;
+    width: 100%;
+  }
+  .review-table tr {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .review-table td {
+    border: 0 !important;
+    border-top: 1px solid var(--border) !important;
+  }
+  .review-table td:first-child {
+    border-top: 0 !important;
+  }
+  .review-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--subtle);
+  }
+}
+
+dialog::backdrop {
+  background: rgb(10 13 18 / 0.55);
+  backdrop-filter: blur(4px);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.25s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
 }
