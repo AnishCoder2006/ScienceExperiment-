@@ -1,4 +1,395 @@
 {
-  "generatedAt": "",
-  "results": []
+  "generatedAt": "2026-11-23T18:24:44.052Z",
+  "results": [
+    {
+      "conceptId": 1,
+      "concept": "Pythagoras' theorem",
+      "subject": "Maths",
+      "model": "gemini-3.5-flash",
+      "status": "pass",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 500\">\n  <title>Pythagoras' Theorem</title>\n\n  <!-- Background -->\n  <rect width=\"800\" height=\"500\" fill=\"#FFFFFF\" />\n\n  <!-- Header Title -->\n  <text x=\"400\" y=\"42\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"24\" font-weight=\"bold\" text-anchor=\"middle\" fill=\"#1E293B\">\n    Pythagoras' Theorem: a² + b² = c²\n  </text>\n\n  <!-- Definiton Subtitle -->\n  <text x=\"400\" y=\"68\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"#64748B\" text-anchor=\"middle\">\n    In a right-angled triangle, the area of the square on the hypotenuse (c²) equals the sum of areas (a² + b²).\n  </text>\n\n  <!-- MAIN DIAGRAM GROUP -->\n  <g transform=\"translate(0, 10)\">\n\n    <!-- SQUARE b² (Left, 4x4 = 16 units) -->\n    <g id=\"square-b\">\n      <rect x=\"150\" y=\"170\" width=\"160\" height=\"160\" fill=\"#FEE2E2\" stroke=\"#EF4444\" stroke-width=\"2.5\" />\n      <!-- Grid 4x4 -->\n      <path d=\"M 190 170 V 330 M 230 170 V 330 M 270 170 V 330 M 150 210 H 310 M 150 250 H 310 M 150 290 H 310\" stroke=\"#EF4444\" stroke-width=\"1\" stroke-dasharray=\"3,3\" opacity=\"0.6\" />\n      <!-- Text label -->\n      <rect x=\"185\" y=\"232\" width=\"90\" height=\"36\" rx=\"6\" fill=\"#FFFFFF\" opacity=\"0.85\" />\n      <text x=\"230\" y=\"255\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"18\" font-weight=\"bold\" fill=\"#B91C1C\" text-anchor=\"middle\">b² = 16</text>\n      <!-- Pulse Animation -->\n      <animate attributeName=\"opacity\" values=\"0.6;1;0.6;0.6;1\" keyTimes=\"0;0.3;0.6;0.8;1\" dur=\"5s\" repeatCount=\"indefinite\" />\n    </g>\n\n    <!-- SQUARE a² (Bottom, 3x3 = 9 units) -->\n    <g id=\"square-a\">\n      <rect x=\"310\" y=\"330\" width=\"120\" height=\"120\" fill=\"#DBEAFE\" stroke=\"#3B82F6\" stroke-width=\"2.5\" />\n      <!-- Grid 3x3 -->\n      <path d=\"M 350 330 V 450 M 390 330 V 450 M 310 370 H 430 M 310 410 H 430\" stroke=\"#3B82F6\" stroke-width=\"1\" stroke-dasharray=\"3,3\" opacity=\"0.6\" />\n      <!-- Text label -->\n      <rect x=\"330\" y=\"372\" width=\"80\" height=\"36\" rx=\"6\" fill=\"#FFFFFF\" opacity=\"0.85\" />\n      <text x=\"370\" y=\"395\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"18\" font-weight=\"bold\" fill=\"#1D4ED8\" text-anchor=\"middle\">a² = 9</text>\n      <!-- Pulse Animation -->\n      <animate attributeName=\"opacity\" values=\"1;0.6;0.6;0.6;1\" keyTimes=\"0;0.3;0.6;0.8;1\" dur=\"5s\" repeatCount=\"indefinite\" />\n    </g>\n\n    <!-- SQUARE c² (On Hypotenuse, 5x5 = 25 units) -->\n    <g id=\"square-c\">\n      <!-- Outer boundary polygon -->\n      <polygon points=\"310,170 430,330 590,210 470,50\" fill=\"#F3E8FF\" stroke=\"#9333EA\" stroke-width=\"2.5\" />\n\n      <!-- 16-tile region (Red overlay representing b²) -->\n      <polygon points=\"310,170 430,330 590,210 470,50\" fill=\"#FCA5A5\" opacity=\"0.7\">\n        <animate attributeName=\"opacity\" values=\"0.2;0.8;0.3;0.3;0.8\" keyTimes=\"0;0.3;0.6;0.8;1\" dur=\"5s\" repeatCount=\"indefinite\" />\n      </polygon>\n\n      <!-- 9-tile region (Blue overlay representing a²) -->\n      <polygon points=\"310,170 382,266 478,194 406,98\" fill=\"#93C5FD\" opacity=\"0.85\">\n        <animate attributeName=\"opacity\" values=\"0.85;0.2;0.3;0.3;0.85\" keyTimes=\"0;0.3;0.6;0.8;1\" dur=\"5s\" repeatCount=\"indefinite\" />\n      </polygon>\n\n      <!-- Grid 5x5 lines -->\n      <!-- Parallel to BA -->\n      <path d=\"M 342 146 L 462 306 M 374 122 L 494 282 M 406 98 L 526 258 M 438 74 L 558 234\" stroke=\"#9333EA\" stroke-width=\"1\" stroke-dasharray=\"3,3\" opacity=\"0.6\" />\n      <!-- Perpendicular to BA -->\n      <path d=\"M 334 202 L 494 82 M 358 234 L 518 114 M 382 266 L 542 146 M 406 298 L 566 178\" stroke=\"#9333EA\" stroke-width=\"1\" stroke-dasharray=\"3,3\" opacity=\"0.6\" />\n\n      <!-- Text label for c² -->\n      <g transform=\"translate(450, 190)\">\n        <rect x=\"-45\" y=\"-18\" width=\"90\" height=\"36\" rx=\"6\" fill=\"#FFFFFF\" opacity=\"0.9\" stroke=\"#9333EA\" stroke-width=\"1.5\" />\n        <text x=\"0\" y=\"6\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"18\" font-weight=\"bold\" fill=\"#6B21A8\" text-anchor=\"middle\">c² = 25</text>\n      </g>\n    </g>\n\n    <!-- RIGHT-ANGLED TRIANGLE -->\n    <polygon points=\"310,330 430,330 310,170\" fill=\"#F1F5F9\" stroke=\"#0F172A\" stroke-width=\"3\" />\n\n    <!-- Right Angle Symbol -->\n    <path d=\"M 310 315 H 325 V 330\" fill=\"none\" stroke=\"#0F172A\" stroke-width=\"2\" />\n\n    <!-- SIDE LABELS -->\n    <!-- Side a -->\n    <text x=\"370\" y=\"322\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#1E3A8A\" text-anchor=\"middle\">a = 3</text>\n\n    <!-- Side b -->\n    <text x=\"300\" y=\"250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#991B1B\" text-anchor=\"end\">b = 4</text>\n\n    <!-- Side c (Hypotenuse) label along line -->\n    <text x=\"380\" y=\"240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#581C87\" transform=\"rotate(53, 375, 245)\" text-anchor=\"middle\">c = 5</text>\n\n    <!-- HYPOTENUSE ANNOTATION / KEY TERM -->\n    <g transform=\"translate(180, 100)\">\n      <rect x=\"-65\" y=\"-14\" width=\"130\" height=\"28\" rx=\"14\" fill=\"#9333EA\" />\n      <text x=\"0\" y=\"5\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">hypotenuse</text>\n      <!-- Arrow pointing to hypotenuse -->\n      <path d=\"M 50 10 L 135 90\" stroke=\"#9333EA\" stroke-width=\"2\" stroke-dasharray=\"4,3\" fill=\"none\" />\n      <polygon points=\"138,93 128,88 133,81\" fill=\"#9333EA\" />\n    </g>\n  </g>\n\n  <!-- RIGHT PANEL: EQUATION & PROOF DISPLAY -->\n  <g transform=\"translate(600, 95)\">\n    <!-- Card Container -->\n    <rect x=\"0\" y=\"0\" width=\"170\" height=\"355\" rx=\"12\" fill=\"#F8FAFC\" stroke=\"#E2E8F0\" stroke-width=\"2\" />\n\n    <!-- Card Header -->\n    <path d=\"M 0 12 C 0 5.37 5.37 0 12 0 H 158 C 164.63 0 170 5.37 170 12 V 45 H 0 Z\" fill=\"#0F172A\" />\n    <text x=\"85\" y=\"28\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"15\" font-weight=\"bold\" fill=\"#FFFFFF\" text-anchor=\"middle\">Formula</text>\n\n    <!-- KEY TERM EQUATION -->\n    <rect x=\"12\" y=\"60\" width=\"146\" height=\"48\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#9333EA\" stroke-width=\"2\" />\n    <text x=\"85\" y=\"90\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"20\" font-weight=\"bold\" fill=\"#6B21A8\" text-anchor=\"middle\">\n      a² + b² = c²\n    </text>\n\n    <!-- Substitution Step by Step -->\n    <text x=\"85\" y=\"135\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" font-weight=\"bold\" fill=\"#475569\" text-anchor=\"middle\">Substitute sides:</text>\n\n    <!-- Step 1: 3² + 4² = 5² -->\n    <g transform=\"translate(15, 150)\">\n      <rect x=\"0\" y=\"0\" width=\"140\" height=\"36\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1\" />\n      <text x=\"70\" y=\"23\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"16\" font-weight=\"bold\" text-anchor=\"middle\">\n        <tspan fill=\"#1D4ED8\">3²</tspan>\n        <tspan fill=\"#475569\"> + </tspan>\n        <tspan fill=\"#B91C1C\">4²</tspan>\n        <tspan fill=\"#475569\"> = </tspan>\n        <tspan fill=\"#6B21A8\">5²</tspan>\n      </text>\n    </g>\n\n    <!-- Step 2: 9 + 16 = 25 -->\n    <g transform=\"translate(15, 198)\">\n      <rect x=\"0\" y=\"0\" width=\"140\" height=\"36\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1\" />\n      <text x=\"70\" y=\"23\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"16\" font-weight=\"bold\" text-anchor=\"middle\">\n        <tspan fill=\"#1D4ED8\">9</tspan>\n        <tspan fill=\"#475569\"> + </tspan>\n        <tspan fill=\"#B91C1C\">16</tspan>\n        <tspan fill=\"#475569\"> = </tspan>\n        <tspan fill=\"#6B21A8\">25</tspan>\n      </text>\n    </g>\n\n    <!-- Step 3: 25 = 25 (Verified) -->\n    <g transform=\"translate(15, 246)\">\n      <rect x=\"0\" y=\"0\" width=\"140\" height=\"40\" rx=\"6\" fill=\"#DCFCE7\" stroke=\"#22C55E\" stroke-width=\"1.5\" />\n      <text x=\"70\" y=\"25\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"16\" font-weight=\"bold\" fill=\"#15803D\" text-anchor=\"middle\">25 = 25 ✓</text>\n    </g>\n\n    <!-- Animated Status / Explanation -->\n    <g transform=\"translate(15, 300)\">\n      <text x=\"70\" y=\"15\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" fill=\"#64748B\" text-anchor=\"middle\">Area Addition:</text>\n      <text x=\"70\" y=\"34\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#0F172A\" text-anchor=\"middle\">\n        <animate attributeName=\"fill\" values=\"#1D4ED8;#B91C1C;#6B21A8;#0F172A\" keyTimes=\"0;0.33;0.66;1\" dur=\"5s\" repeatCount=\"indefinite\" />\n        9 + 16 = 25\n      </text>\n    </g>\n  </g>\n\n</svg>",
+      "checks": [
+        {
+          "id": "valid",
+          "label": "Valid SVG",
+          "passed": true,
+          "detail": "Parsed without errors. viewBox is 0 0 800 500."
+        },
+        {
+          "id": "inViewBox",
+          "label": "Inside viewBox",
+          "passed": true,
+          "detail": "All 41 drawn elements stay inside the viewBox (0 0 800 500), including animated positions."
+        },
+        {
+          "id": "labels",
+          "label": "Title + 3 labels",
+          "passed": true,
+          "detail": "Title \"Pythagoras' Theorem\" and 17 text labels."
+        },
+        {
+          "id": "animated",
+          "label": "Animated",
+          "passed": true,
+          "detail": "Found 5 SMIL animation(s) (animate)."
+        },
+        {
+          "id": "keyTerms",
+          "label": "Key terms labelled",
+          "passed": true,
+          "detail": "All 2 key terms are labelled: hypotenuse, the equation a² + b² = c²."
+        },
+        {
+          "id": "safe",
+          "label": "Safe to embed",
+          "passed": true,
+          "detail": "No scripts, event handlers or external resources."
+        }
+      ],
+      "usage": {
+        "inputTokens": 506,
+        "outputTokens": 10988,
+        "thinkingTokens": 7333
+      },
+      "costUsd": 0.099651,
+      "retries": {
+        "validation": 0,
+        "api": 0,
+        "total": 0
+      },
+      "chosenAttempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "usage": {
+            "inputTokens": 506,
+            "outputTokens": 10988,
+            "thinkingTokens": 7333
+          },
+          "costUsd": 0.099651,
+          "durationMs": 45880,
+          "apiRetries": 0,
+          "finishReason": "STOP",
+          "checks": [
+            {
+              "id": "valid",
+              "label": "Valid SVG",
+              "passed": true,
+              "detail": "Parsed without errors. viewBox is 0 0 800 500."
+            },
+            {
+              "id": "inViewBox",
+              "label": "Inside viewBox",
+              "passed": true,
+              "detail": "All 41 drawn elements stay inside the viewBox (0 0 800 500), including animated positions."
+            },
+            {
+              "id": "labels",
+              "label": "Title + 3 labels",
+              "passed": true,
+              "detail": "Title \"Pythagoras' Theorem\" and 17 text labels."
+            },
+            {
+              "id": "animated",
+              "label": "Animated",
+              "passed": true,
+              "detail": "Found 5 SMIL animation(s) (animate)."
+            },
+            {
+              "id": "keyTerms",
+              "label": "Key terms labelled",
+              "passed": true,
+              "detail": "All 2 key terms are labelled: hypotenuse, the equation a² + b² = c²."
+            },
+            {
+              "id": "safe",
+              "label": "Safe to embed",
+              "passed": true,
+              "detail": "No scripts, event handlers or external resources."
+            }
+          ]
+        }
+      ],
+      "warnings": [],
+      "durationMs": 45919,
+      "generatedAt": "2026-11-23T18:07:49.564Z"
+    },
+    {
+      "conceptId": 2,
+      "concept": "Parts of a circle",
+      "subject": "Maths",
+      "model": "gemini-3.5-flash-lite",
+      "status": "pass",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 500\">\n  <title>Parts of a circle</title>\n  \n  <!-- Background -->\n  <rect x=\"0\" y=\"0\" width=\"800\" height=\"500\" fill=\"#ffffff\" />\n  \n  <!-- Heading -->\n  <text x=\"400\" y=\"45\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"26\" font-weight=\"bold\" fill=\"#2c3e50\" text-anchor=\"middle\">Parts of a Circle</text>\n\n  <!-- Circle Group shifted right for label space, moved slightly up to prevent overflow -->\n  <g transform=\"translate(440, 240)\">\n    \n    <!-- Circumference animation path/glow ring -->\n    <circle cx=\"0\" cy=\"0\" r=\"150\" fill=\"none\" stroke=\"#e74c3c\" stroke-width=\"4\" stroke-dasharray=\"942\" stroke-dashoffset=\"942\">\n      <animate attributeName=\"stroke-dashoffset\" values=\"942;0;942\" dur=\"6s\" repeatCount=\"indefinite\" />\n    </circle>\n    \n    <!-- Main Circle Fill and Stroke (Circumference) -->\n    <circle cx=\"0\" cy=\"0\" r=\"150\" fill=\"#edf2f7\" stroke=\"#2c3e50\" stroke-width=\"4\" />\n    \n    <!-- Diameter Line -->\n    <line x1=\"-150\" y1=\"0\" x2=\"150\" y2=\"0\" stroke=\"#2980b9\" stroke-width=\"3\" stroke-dasharray=\"6,6\" />\n    \n    <!-- Radius Line -->\n    <line x1=\"0\" y1=\"0\" x2=\"150\" y2=\"0\" stroke=\"#27ae60\" stroke-width=\"4\" />\n    \n    <!-- Centre Point -->\n    <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#2c3e50\" />\n    \n    <!-- Pulsing effect on the Centre -->\n    <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"none\" stroke=\"#e67e22\" stroke-width=\"3\">\n      <animate attributeName=\"r\" values=\"6;18;6\" dur=\"2s\" repeatCount=\"indefinite\" />\n      <animate attributeName=\"opacity\" values=\"1;0;1\" dur=\"2s\" repeatCount=\"indefinite\" />\n    </circle>\n\n    <!-- Moving point along circumference to illustrate perimeter -->\n    <circle r=\"7\" fill=\"#e74c3c\">\n      <animateMotion path=\"M 150 0 A 150 150 0 1 1 149.9 -0.1 Z\" dur=\"6s\" repeatCount=\"indefinite\" />\n    </circle>\n  </g>\n\n  <!-- Labels and pointers -->\n  \n  <!-- Centre Label -->\n  <g transform=\"translate(440, 240)\">\n    <line x1=\"0\" y1=\"0\" x2=\"-60\" y2=\"-50\" stroke=\"#7f8c8d\" stroke-width=\"2\" />\n    <circle cx=\"-60\" cy=\"-50\" r=\"3\" fill=\"#7f8c8d\" />\n    <text x=\"-70\" y=\"-60\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"18\" font-weight=\"bold\" fill=\"#2c3e50\" text-anchor=\"end\">centre</text>\n  </g>\n\n  <!-- Radius Label -->\n  <g transform=\"translate(440, 240)\">\n    <line x1=\"75\" y1=\"0\" x2=\"75\" y2=\"-90\" stroke=\"#27ae60\" stroke-width=\"2\" />\n    <text x=\"75\" y=\"-105\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"18\" font-weight=\"bold\" fill=\"#27ae60\" text-anchor=\"middle\">radius</text>\n  </g>\n\n  <!-- Diameter Label -->\n  <g transform=\"translate(440, 240)\">\n    <text x=\"0\" y=\"30\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"18\" font-weight=\"bold\" fill=\"#2980b9\" text-anchor=\"middle\">diameter</text>\n  </g>\n\n  <!-- Circumference Label -->\n  <g transform=\"translate(180, 140)\">\n    <path d=\"M 90 20 Q 20 20 5 -40\" fill=\"none\" stroke=\"#e74c3c\" stroke-width=\"2\" />\n    <text x=\"5\" y=\"-55\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"18\" font-weight=\"bold\" fill=\"#e74c3c\" text-anchor=\"middle\">circumference</text>\n  </g>\n\n  <!-- Educational explanatory text box at bottom-left -->\n  <rect x=\"40\" y=\"370\" width=\"340\" height=\"90\" rx=\"10\" ry=\"10\" fill=\"#f8f9fa\" stroke=\"#bdc3c7\" stroke-width=\"2\" />\n  <text x=\"210\" y=\"398\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"15\" font-weight=\"bold\" fill=\"#34495e\" text-anchor=\"middle\">Key Facts:</text>\n  <text x=\"55\" y=\"423\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"#2c3e50\">• diameter = 2 × radius</text>\n  <text x=\"55\" y=\"445\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"#2c3e50\">• circumference = π × diameter</text>\n\n</svg>",
+      "checks": [
+        {
+          "id": "valid",
+          "label": "Valid SVG",
+          "passed": true,
+          "detail": "Parsed without errors. viewBox is 0 0 800 500."
+        },
+        {
+          "id": "inViewBox",
+          "label": "Inside viewBox",
+          "passed": true,
+          "detail": "All 21 drawn elements stay inside the viewBox (0 0 800 500), including animated positions."
+        },
+        {
+          "id": "labels",
+          "label": "Title + 3 labels",
+          "passed": true,
+          "detail": "Title \"Parts of a circle\" and 8 text labels."
+        },
+        {
+          "id": "animated",
+          "label": "Animated",
+          "passed": true,
+          "detail": "Found 4 SMIL animation(s) (animate, animateMotion)."
+        },
+        {
+          "id": "keyTerms",
+          "label": "Key terms labelled",
+          "passed": true,
+          "detail": "All 4 key terms are labelled: centre, radius, diameter, circumference."
+        },
+        {
+          "id": "safe",
+          "label": "Safe to embed",
+          "passed": true,
+          "detail": "No scripts, event handlers or external resources."
+        }
+      ],
+      "usage": {
+        "inputTokens": 2527,
+        "outputTokens": 2910,
+        "thinkingTokens": 0
+      },
+      "costUsd": 0.008033,
+      "retries": {
+        "validation": 1,
+        "api": 1,
+        "total": 2
+      },
+      "chosenAttempt": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "usage": {
+            "inputTokens": 496,
+            "outputTokens": 1458,
+            "thinkingTokens": 0
+          },
+          "costUsd": 0.003794,
+          "durationMs": 3925,
+          "apiRetries": 0,
+          "finishReason": "STOP",
+          "checks": [
+            {
+              "id": "valid",
+              "label": "Valid SVG",
+              "passed": true,
+              "detail": "Parsed without errors. viewBox is 0 0 800 500."
+            },
+            {
+              "id": "inViewBox",
+              "label": "Inside viewBox",
+              "passed": false,
+              "detail": "1 element(s) go outside the viewBox (0 0 800 500): <circle>: bottom edge at y=540.1 (max 500)."
+            },
+            {
+              "id": "labels",
+              "label": "Title + 3 labels",
+              "passed": true,
+              "detail": "Title \"Parts of a circle\" and 8 text labels."
+            },
+            {
+              "id": "animated",
+              "label": "Animated",
+              "passed": true,
+              "detail": "Found 4 SMIL animation(s) (animate, animateMotion)."
+            },
+            {
+              "id": "keyTerms",
+              "label": "Key terms labelled",
+              "passed": true,
+              "detail": "All 4 key terms are labelled: centre, radius, diameter, circumference."
+            },
+            {
+              "id": "safe",
+              "label": "Safe to embed",
+              "passed": true,
+              "detail": "No scripts, event handlers or external resources."
+            }
+          ],
+          "feedbackSent": "Your SVG failed these automated checks:\n- Inside viewBox: 1 element(s) go outside the viewBox (0 0 800 500): <circle>: bottom edge at y=540.1 (max 500).\nFix every problem above. Keep everything that already worked. Reply with the complete corrected SVG only."
+        },
+        {
+          "attempt": 2,
+          "usage": {
+            "inputTokens": 2031,
+            "outputTokens": 1452,
+            "thinkingTokens": 0
+          },
+          "costUsd": 0.004239,
+          "durationMs": 10977,
+          "apiRetries": 1,
+          "finishReason": "STOP",
+          "checks": [
+            {
+              "id": "valid",
+              "label": "Valid SVG",
+              "passed": true,
+              "detail": "Parsed without errors. viewBox is 0 0 800 500."
+            },
+            {
+              "id": "inViewBox",
+              "label": "Inside viewBox",
+              "passed": true,
+              "detail": "All 21 drawn elements stay inside the viewBox (0 0 800 500), including animated positions."
+            },
+            {
+              "id": "labels",
+              "label": "Title + 3 labels",
+              "passed": true,
+              "detail": "Title \"Parts of a circle\" and 8 text labels."
+            },
+            {
+              "id": "animated",
+              "label": "Animated",
+              "passed": true,
+              "detail": "Found 4 SMIL animation(s) (animate, animateMotion)."
+            },
+            {
+              "id": "keyTerms",
+              "label": "Key terms labelled",
+              "passed": true,
+              "detail": "All 4 key terms are labelled: centre, radius, diameter, circumference."
+            },
+            {
+              "id": "safe",
+              "label": "Safe to embed",
+              "passed": true,
+              "detail": "No scripts, event handlers or external resources."
+            }
+          ]
+        }
+      ],
+      "warnings": [],
+      "durationMs": 14922,
+      "generatedAt": "2026-11-23T18:14:58.385Z"
+    },
+    {
+      "conceptId": 5,
+      "concept": "States of matter",
+      "subject": "Chemistry",
+      "model": "gemini-3.5-flash-lite",
+      "status": "pass",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 500\">\n  <title>States of Matter</title>\n\n  <!-- Background -->\n  <rect width=\"800\" height=\"500\" fill=\"#ffffff\" />\n\n  <!-- Title -->\n  <text x=\"400\" y=\"45\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"28\" font-weight=\"bold\" fill=\"#2c3e50\" text-anchor=\"middle\">States of Matter</text>\n\n  <!-- Subtitle quotation from prompt -->\n  <text x=\"400\" y=\"72\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"#7f8c8d\" text-anchor=\"middle\">\"Solid particles vibrate, liquid particles move past each other, gas particles move fast.\"</text>\n\n  <!-- Container 1: Solid -->\n  <g transform=\"translate(60, 110)\">\n    <rect width=\"200\" height=\"320\" rx=\"15\" fill=\"#f8f9fa\" stroke=\"#bdc3c7\" stroke-width=\"3\" />\n    <text x=\"100\" y=\"35\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"22\" font-weight=\"bold\" fill=\"#2980b9\" text-anchor=\"middle\">solid</text>\n    \n    <!-- Solid Particles (Grid) -->\n    <g fill=\"#3498db\" stroke=\"#2980b9\" stroke-width=\"2\">\n      <!-- Row 1 -->\n      <circle cx=\"50\" cy=\"100\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 2,-2; -2,2; 0,0\" dur=\"0.4s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"100\" cy=\"100\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -1,2; 1,-2; 0,0\" dur=\"0.5s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"150\" cy=\"100\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 2,1; -2,-1; 0,0\" dur=\"0.45s\" repeatCount=\"indefinite\" /></circle>\n      <!-- Row 2 -->\n      <circle cx=\"50\" cy=\"150\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -2,-1; 2,1; 0,0\" dur=\"0.5s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"100\" cy=\"150\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 1,-2; -1,2; 0,0\" dur=\"0.4s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"150\" cy=\"150\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -2,2; 2,-2; 0,0\" dur=\"0.48s\" repeatCount=\"indefinite\" /></circle>\n      <!-- Row 3 -->\n      <circle cx=\"50\" cy=\"200\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 1,2; -1,-2; 0,0\" dur=\"0.42s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"100\" cy=\"200\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -2,-2; 2,2; 0,0\" dur=\"0.46s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"150\" cy=\"200\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 2,-1; -2,1; 0,0\" dur=\"0.44s\" repeatCount=\"indefinite\" /></circle>\n      <!-- Row 4 -->\n      <circle cx=\"50\" cy=\"250\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -1,-1; 1,1; 0,0\" dur=\"0.5s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"100\" cy=\"250\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 2,2; -2,-2; 0,0\" dur=\"0.4s\" repeatCount=\"indefinite\" /></circle>\n      <circle cx=\"150\" cy=\"250\" r=\"14\"><animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -1,2; 1,-2; 0,0\" dur=\"0.45s\" repeatCount=\"indefinite\" /></circle>\n    </g>\n    <text x=\"100\" y=\"295\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" fill=\"#7f8c8d\" text-anchor=\"middle\">Vibrate in place</text>\n  </g>\n\n  <!-- Container 2: Liquid -->\n  <g transform=\"translate(300, 110)\">\n    <rect width=\"200\" height=\"320\" rx=\"15\" fill=\"#f8f9fa\" stroke=\"#bdc3c7\" stroke-width=\"3\" />\n    <text x=\"100\" y=\"35\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"22\" font-weight=\"bold\" fill=\"#27ae60\" text-anchor=\"middle\">liquid</text>\n\n    <!-- Liquid Particles (Flowing/Closer, moving past each other) -->\n    <g fill=\"#2ecc71\" stroke=\"#27ae60\" stroke-width=\"2\">\n      <circle cx=\"60\" cy=\"110\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 15,-10; 5,15; -10,5; 0,0\" dur=\"4s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"130\" cy=\"100\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -15,10; -5,-15; 10,-5; 0,0\" dur=\"3.5s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"95\" cy=\"160\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 10,12; -12,-5; 5,-10; 0,0\" dur=\"4.2s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"50\" cy=\"210\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -8,-15; 12,8; -4,10; 0,0\" dur=\"3.8s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"140\" cy=\"215\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 12,5; -10,-12; -2,15; 0,0\" dur=\"4.5s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"100\" cy=\"265\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -10,8; 8,-12; -5,-5; 0,0\" dur=\"3.6s\" repeatCount=\"indefinite\" />\n      </circle>\n    </g>\n    <text x=\"100\" y=\"295\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" fill=\"#7f8c8d\" text-anchor=\"middle\">Close, move past</text>\n  </g>\n\n  <!-- Container 3: Gas -->\n  <g transform=\"translate(540, 110)\">\n    <rect width=\"200\" height=\"320\" rx=\"15\" fill=\"#f8f9fa\" stroke=\"#bdc3c7\" stroke-width=\"3\" />\n    <text x=\"100\" y=\"35\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"22\" font-weight=\"bold\" fill=\"#d35400\" text-anchor=\"middle\">gas</text>\n\n    <!-- Gas Particles (Far apart, fast, random motion) -->\n    <g fill=\"#e67e22\" stroke=\"#d35400\" stroke-width=\"2\">\n      <circle cx=\"55\" cy=\"95\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 45,60; -25,30; 30,-40; 0,0\" dur=\"2.2s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"145\" cy=\"120\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -50,-30; -20,70; 40,20; 0,0\" dur=\"1.8s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"100\" cy=\"190\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 30,-70; -40,-20; 50,40; 0,0\" dur=\"2s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"50\" cy=\"260\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; 60,-40; 20,-60; -30,20; 0,0\" dur=\"1.9s\" repeatCount=\"indefinite\" />\n      </circle>\n      <circle cx=\"150\" cy=\"250\" r=\"14\">\n        <animateTransform attributeName=\"transform\" type=\"translate\" values=\"0,0; -40,30; -50,-50; 25,45; 0,0\" dur=\"2.4s\" repeatCount=\"indefinite\" />\n      </circle>\n    </g>\n    <text x=\"100\" y=\"295\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" fill=\"#7f8c8d\" text-anchor=\"middle\">Far apart, fast</text>\n  </g>\n\n</svg>",
+      "checks": [
+        {
+          "id": "valid",
+          "label": "Valid SVG",
+          "passed": true,
+          "detail": "Parsed without errors. viewBox is 0 0 800 500."
+        },
+        {
+          "id": "inViewBox",
+          "label": "Inside viewBox",
+          "passed": true,
+          "detail": "All 35 drawn elements stay inside the viewBox (0 0 800 500), including animated positions."
+        },
+        {
+          "id": "labels",
+          "label": "Title + 3 labels",
+          "passed": true,
+          "detail": "Title \"States of Matter\" and 8 text labels."
+        },
+        {
+          "id": "animated",
+          "label": "Animated",
+          "passed": true,
+          "detail": "Found 23 SMIL animation(s) (animateTransform)."
+        },
+        {
+          "id": "keyTerms",
+          "label": "Key terms labelled",
+          "passed": true,
+          "detail": "All 3 key terms are labelled: solid, liquid, gas."
+        },
+        {
+          "id": "safe",
+          "label": "Safe to embed",
+          "passed": true,
+          "detail": "No scripts, event handlers or external resources."
+        }
+      ],
+      "usage": {
+        "inputTokens": 486,
+        "outputTokens": 2731,
+        "thinkingTokens": 0
+      },
+      "costUsd": 0.006973,
+      "retries": {
+        "validation": 0,
+        "api": 1,
+        "total": 1
+      },
+      "chosenAttempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "usage": {
+            "inputTokens": 486,
+            "outputTokens": 2731,
+            "thinkingTokens": 0
+          },
+          "costUsd": 0.006973,
+          "durationMs": 14999,
+          "apiRetries": 1,
+          "finishReason": "STOP",
+          "checks": [
+            {
+              "id": "valid",
+              "label": "Valid SVG",
+              "passed": true,
+              "detail": "Parsed without errors. viewBox is 0 0 800 500."
+            },
+            {
+              "id": "inViewBox",
+              "label": "Inside viewBox",
+              "passed": true,
+              "detail": "All 35 drawn elements stay inside the viewBox (0 0 800 500), including animated positions."
+            },
+            {
+              "id": "labels",
+              "label": "Title + 3 labels",
+              "passed": true,
+              "detail": "Title \"States of Matter\" and 8 text labels."
+            },
+            {
+              "id": "animated",
+              "label": "Animated",
+              "passed": true,
+              "detail": "Found 23 SMIL animation(s) (animateTransform)."
+            },
+            {
+              "id": "keyTerms",
+              "label": "Key terms labelled",
+              "passed": true,
+              "detail": "All 3 key terms are labelled: solid, liquid, gas."
+            },
+            {
+              "id": "safe",
+              "label": "Safe to embed",
+              "passed": true,
+              "detail": "No scripts, event handlers or external resources."
+            }
+          ]
+        }
+      ],
+      "warnings": [],
+      "durationMs": 15023,
+      "generatedAt": "2026-11-23T18:24:44.051Z"
+    }
+  ]
 }
