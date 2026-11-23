@@ -2,20 +2,20 @@
 
 /* Design tokens. Components use them through Tailwind classes such as bg-surface or text-muted. */
 :root {
-  --bg: #f7f8fb;
+  --bg: #e9eff7;
   --surface: #ffffff;
-  --surface-2: #f3f4f8;
-  --border: #e4e7ee;
-  --border-strong: #d3d8e3;
-  --fg: #0b1020;
-  --muted: #4d5568;
-  --subtle: #7b8296;
-  --accent: #5b5bf0;
-  --accent-hover: #4646e0;
+  --surface-2: #f3f6fb;
+  --border: #d8e1ec;
+  --border-strong: #c3cfdf;
+  --fg: #0b1324;
+  --muted: #45536a;
+  --subtle: #6a7a91;
+  --accent: #0b6bd8;
+  --accent-hover: #0957b2;
   --accent-fg: #ffffff;
-  --accent-soft: #eeeeff;
-  --accent-2: #0ea5e9;
-  --accent-3: #d946ef;
+  --accent-soft: #e2eeff;
+  --accent-2: #0891b2;
+  --accent-3: #0d9488;
   --pass: #14833b;
   --pass-soft: #e5f6ea;
   --fail: #c9261d;
@@ -23,8 +23,8 @@
   --warn: #9a5b00;
   --warn-soft: #fff5db;
   --paper: #ffffff;
-  --glow: rgb(91 91 240 / 0.18);
-  --grid-line: rgb(11 16 32 / 0.05);
+  --glow: rgb(11 107 216 / 0.16);
+  --grid-line: rgb(11 19 36 / 0.06);
   --shadow-sm: 0 1px 2px rgb(11 16 32 / 0.05);
   --shadow: 0 1px 2px rgb(11 16 32 / 0.04), 0 12px 32px -12px rgb(11 16 32 / 0.16);
   color-scheme: light;
@@ -32,28 +32,28 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #07080c;
-    --surface: #0e1016;
-    --surface-2: #141720;
-    --border: #1d212c;
-    --border-strong: #2a2f3d;
-    --fg: #eef0f7;
-    --muted: #a3a9bb;
-    --subtle: #6d7386;
-    --accent: #8183ff;
-    --accent-hover: #9c9dff;
-    --accent-fg: #07080c;
-    --accent-soft: rgb(129 131 255 / 0.12);
-    --accent-2: #38bdf8;
-    --accent-3: #e879f9;
+    --bg: #060c18;
+    --surface: #0e1829;
+    --surface-2: #142137;
+    --border: #1c2a43;
+    --border-strong: #2a3b59;
+    --fg: #edf2fa;
+    --muted: #a2b0c5;
+    --subtle: #6d7e97;
+    --accent: #4ea3ff;
+    --accent-hover: #78baff;
+    --accent-fg: #06101f;
+    --accent-soft: rgb(78 163 255 / 0.13);
+    --accent-2: #22d3ee;
+    --accent-3: #2dd4bf;
     --pass: #4ade80;
     --pass-soft: rgb(74 222 128 / 0.1);
     --fail: #f87171;
     --fail-soft: rgb(248 113 113 / 0.1);
     --warn: #fbbf24;
     --warn-soft: rgb(251 191 36 / 0.08);
-    --glow: rgb(129 131 255 / 0.22);
-    --grid-line: rgb(255 255 255 / 0.04);
+    --glow: rgb(78 163 255 / 0.18);
+    --grid-line: rgb(255 255 255 / 0.045);
     --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -16px rgb(0 0 0 / 0.7);
     color-scheme: dark;
@@ -89,7 +89,12 @@
 }
 
 body {
-  background: var(--bg);
+  background-color: var(--bg);
+  /* A soft blue wash at the top and a teal one at the bottom, so panels stand out from the page. */
+  background-image:
+    radial-gradient(90% 60% at 50% -10%, var(--glow), transparent 65%),
+    radial-gradient(60% 40% at 100% 100%, rgb(13 148 136 / 0.07), transparent 70%);
+  background-attachment: fixed;
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -112,7 +117,7 @@ section[id] {
   background:
     radial-gradient(60% 50% at 50% 0%, var(--glow), transparent 70%),
     radial-gradient(30% 30% at 85% 20%, rgb(14 165 233 / 0.1), transparent 70%),
-    radial-gradient(30% 30% at 15% 30%, rgb(217 70 239 / 0.08), transparent 70%);
+    radial-gradient(30% 30% at 15% 30%, rgb(13 148 136 / 0.1), transparent 70%);
 }
 .grid-bg {
   background-image:
@@ -123,7 +128,7 @@ section[id] {
 }
 
 .text-gradient {
-  background: linear-gradient(100deg, var(--accent) 10%, var(--accent-3) 55%, var(--accent-2) 95%);
+  background: linear-gradient(100deg, var(--accent) 10%, var(--accent-2) 55%, var(--accent-3) 95%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

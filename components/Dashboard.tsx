@@ -431,10 +431,8 @@ function NavBar({ passing, total }: { passing: number; total: number }) {
     <div className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4">
       <nav
         aria-label="Main"
-        className={`mx-auto max-w-6xl rounded-2xl transition-all duration-300 ${
-          scrolled || menuOpen
-            ? "bg-surface/80 shadow-card ring-1 ring-border backdrop-blur-xl"
-            : "bg-transparent ring-1 ring-transparent"
+        className={`mx-auto max-w-6xl rounded-2xl bg-surface/90 ring-1 ring-border backdrop-blur-xl transition-shadow duration-300 ${
+          scrolled || menuOpen ? "shadow-card" : "shadow-subtle"
         }`}
       >
         <div className="flex h-14 items-center gap-3 pl-3 pr-2">

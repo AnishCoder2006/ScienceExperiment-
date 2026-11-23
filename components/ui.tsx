@@ -26,9 +26,9 @@ export const SUBJECT_THEME: Record<Subject, { chip: string; stripe: string; tile
     Icon: LeafIcon,
   },
   Chemistry: {
-    chip: "bg-violet-500/10 text-violet-800 dark:text-violet-300 ring-violet-500/25",
-    stripe: "bg-violet-500",
-    tile: "bg-violet-500/12 text-violet-700 dark:text-violet-300",
+    chip: "bg-rose-500/10 text-rose-800 dark:text-rose-300 ring-rose-500/25",
+    stripe: "bg-rose-500",
+    tile: "bg-rose-500/12 text-rose-700 dark:text-rose-300",
     Icon: FlaskIcon,
   },
 };
